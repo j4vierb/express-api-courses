@@ -1,0 +1,20 @@
+{
+  "name": "express-college-api",
+  "version": "1.0.0",
+  "description": "An API REST to enroll students into courses in a college.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {  
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "api",
+    "api-rest"
+  ],
+  "author": "j4vierb",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mysql2": "^3.10.0"
+  }
+}

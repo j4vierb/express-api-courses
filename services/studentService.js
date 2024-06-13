@@ -28,7 +28,33 @@ async function createStudent({ id, name, surname, unique_code}) {
     message = 'Student created successfully';
   }
 
+  return { id, name, surname, unique_code };
+}
+
+async function deleteStudent(id) {
+  const result = await db.query(
+    `DELETE FROM student WHERE id = ?;`,
+    [id]
+  );
+
+  let message = 'Error in deleting student';
+  if(result.affectedRows) {
+    message = 'Student deleted successfully';
+  }
   return { message };
 }
 
-export default { getStudents, getStudent, createStudent };
+async function updateStudent({ id, name, surname, unique_code }) {
+  const result = await db.query(
+    `UPDATE student SET name = ?, surname = ?, unique_code = ? WHERE id = ?;`,
+    [name, surname, unique_code, id]
+  );
+
+  let message = 'Error in updating student';
+  if(result.affectedRows) {
+    message = 'Student updated successfully';
+  }
+  return { id, name, surname, unique_code };
+};
+
+export default { getStudents, getStudent, createStudent, deleteStudent, updateStudent };

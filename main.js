@@ -5,7 +5,6 @@ const app = express();
 const port = 3003;
 
 app.disable('x-powered-by');
-
 app.use(express.json());
 
 // logging midleware

@@ -17,18 +17,18 @@ async function getStudent(id) {
   return data;
 }
 
-async function createStudent({ id, name, surname, unique_code}) {
-  const result = await db.query(
-    `INSERT INTO student (id, name, surname, unique_code) VALUES (?, ?, ?, ?);`,
-    [id, name, surname, unique_code]
+async function createStudent({ name, surname, unique_code}) {
+  const { insertId, affectedRows } = await db.query(
+    `INSERT INTO student (name, surname, unique_code) VALUES (?, ?, ?);`,
+    [name, surname, unique_code]
   );
   let message = 'Error in creating student';
 
-  if (result.affectedRows) {
+  if (affectedRows) {
     message = 'Student created successfully';
   }
 
-  return { id, name, surname, unique_code };
+  return { insertId, name, surname, unique_code };
 }
 
 async function deleteStudent(id) {
@@ -44,7 +44,7 @@ async function deleteStudent(id) {
   return { message };
 }
 
-async function updateStudent({ id, name, surname, unique_code }) {
+async function updateStudent({ name, surname, unique_code }, id) {
   const result = await db.query(
     `UPDATE student SET name = ?, surname = ?, unique_code = ? WHERE id = ?;`,
     [name, surname, unique_code, id]

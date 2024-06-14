@@ -3,7 +3,7 @@ import cors from 'cors';
 import studentRoutes from './routes/studentRoutes.js';
 
 const app = express();
-const port = 3003;
+const port = process.env.PORT || 3003;
 
 app.disable('x-powered-by');
 app.use(express.json());

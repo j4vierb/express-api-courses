@@ -52,6 +52,13 @@ async function deleteStudent(id) {
 }
 
 async function updateStudent({ name, surname, unique_code }, id) {
+  const validationResult = validateStudent({ name, surname, unique_code });
+
+  /* TODO: this validations should to be in studentRoutes? */
+  if(!validationResult.success) {
+    return { error: validationResult.error };
+  }
+
   const result = await db.query(
     `UPDATE student SET name = ?, surname = ?, unique_code = ? WHERE id = ?;`,
     [name, surname, unique_code, id]

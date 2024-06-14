@@ -40,8 +40,10 @@ router.delete('/:id', async function(req, res, next) {
 });
 
 router.put('/:id', async function(req, res, next) {
+  const { id } = req.params;
+
   try {
-    res.json(await studentService.updateStudent(req.body, req.params.id));
+    res.json(await studentService.updateStudent(req.body, id));
   } catch(err) {
     console.error(`Error while updating programming language `, err.message);
     next(err);

@@ -21,4 +21,15 @@ function validateStudent(data) {
   return studentSchema.safeParse(data);
 }
 
-export default validateStudent;
+/**
+ * Function to validate partial object with student schema.
+ * Makes optional all the properties to validate. 
+ * 
+ * @param {*} data 
+ * @returns 
+ */
+function validatePartialStudent(data) {
+  return studentSchema.partial().safeParse(data);
+}
+
+export default { validateStudent, validatePartialStudent };

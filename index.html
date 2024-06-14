@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch API</title>
+  <style>
+    * {
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h1>This file represents the problem of <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank">CORS</a></h1>
+  <div id="root"></div>
+
+  <script>
+    const root = document.getElementById('root');
+
+    fetch('http://localhost:3003/students')
+      .then(response => response.json())
+      .then(data => {
+        root.innerHTML = `
+          <ul>
+            ${data.map(student => `<li>${student.name} - ${student.surname}</li>`).join('')}
+          </ul>
+        `;
+      });
+
+    console.log('Hello from the end of the file!')
+  </script>
+</body>
+</html>

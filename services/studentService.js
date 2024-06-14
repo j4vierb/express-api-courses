@@ -1,3 +1,4 @@
+import validateStudent from '../schemas/studentSchema.js';
 import db from './db.js';
 
 async function getStudents() {
@@ -18,6 +19,12 @@ async function getStudent(id) {
 }
 
 async function createStudent({ name, surname, unique_code}) {
+  const result = validateStudent({ name, surname, unique_code });
+
+  if(result.error) {
+    return { error: result.error };
+  }
+
   const { insertId, affectedRows } = await db.query(
     `INSERT INTO student (name, surname, unique_code) VALUES (?, ?, ?);`,
     [name, surname, unique_code]

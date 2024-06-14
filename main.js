@@ -31,7 +31,7 @@ app.use(cors({
 }));
 
 app.get('/', (req, res) => {
-  res.json({message: 'ok'});
+  res.json({message: 'hello world'});
 });
 
 app.use('/students', studentRoutes);

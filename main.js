@@ -14,6 +14,8 @@ app.use((req, res, next) => {
   next();
 });
 
+// if is neccesary to allow all origin just remove the
+// cors options object
 app.use(cors({
   origin: (origin, callback) => {
     const ACEPTED_ORIGINS = [

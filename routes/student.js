@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import studentService from '../services/studentService.js';
+import studentService from '../services/student.js';
 
 router.get('/', async function(req, res, next) {
   try {

@@ -16,3 +16,15 @@ const config = {
 
 export default config;
 ```
+
+## Model-View-Controller architecture
+
+```txt
+| ---------- |
+|   View     |
+| ---------- |
+| Controller |
+| ---------- |                   | ---------- |
+|   Model    | <- D. Injection - |  Services  |
+| ---------- |                   | ---------- |
+```

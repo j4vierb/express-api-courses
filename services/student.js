@@ -1,4 +1,4 @@
-import validateStudent from '../schemas/studentSchema.js';
+import validateStudent from '../schemas/student.js';
 import db from './db.js';
 
 async function getStudents() {
@@ -68,6 +68,7 @@ async function updateStudent({ name, surname, unique_code }, id) {
   if(result.affectedRows) {
     message = 'Student updated successfully';
   }
+
   return { id, name, surname, unique_code };
 };
 

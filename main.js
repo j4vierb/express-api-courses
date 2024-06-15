@@ -1,5 +1,6 @@
 import express from 'express';
 import studentRoutes from './routes/student.js';
+import courseRoutes from './routes/course.js';
 import getCorsOptions from './middleware/cors.js';
 import loggingMiddleware from './middleware/logging.js';
 
@@ -12,8 +13,8 @@ app.disable('x-powered-by');
 app.use(express.json());
 // logging midleware
 app.use(loggingMiddleware);
-// if is neccesary to allow all origin just remove the
-// cors options object
+// if is neccesary to allow all origin
+// just remove the getCorsOptions function
 app.use(getCorsOptions());
 
 app.get('/', (req, res) => {
@@ -21,6 +22,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/students', studentRoutes);
+app.use('/courses', courseRoutes);
 
 app.use((req, res) => {
   res.status(404).send('<h1>404 Not Found</h1>');

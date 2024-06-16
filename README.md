@@ -1,4 +1,4 @@
-# Express college API REST
+# Express API REST about courses
 
 This project is only to build a demo to learn how to use Express.js and MySQL. To configure it only change the database connection params in `./config.js`, it should to look like this:
 

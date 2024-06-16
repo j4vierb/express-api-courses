@@ -2,7 +2,7 @@ import express from 'express';
 import studentRoutes from './routes/student.js';
 import { createCourseRouter } from './routes/course.js';
 import getCorsOptions from './middleware/cors.js';
-import loggingMiddleware from './middleware/logging.js';
+import createLoggingMiddleware from './middleware/logging.js';
 
 import { CourseModel } from './models/course.js';
 
@@ -14,7 +14,7 @@ app.disable('x-powered-by');
 // Midlewares
 app.use(express.json());
 // logging midleware
-app.use(loggingMiddleware);
+app.use(createLoggingMiddleware());
 // if is neccesary to allow all origin
 // just remove the getCorsOptions function
 app.use(getCorsOptions());

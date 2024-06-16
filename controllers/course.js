@@ -1,20 +1,32 @@
-import { CourseModel } from '../models/course.js';
-
+/**
+ * Class representing a course controller. Uses the
+ * design pattern dependency injection to inject the
+ * course model into the controller.
+ * 
+ * **note:** The "methods" of this class are really
+ * properties with functions assigned to them.
+ * 
+ * @author j4vierb
+ */
 export class CourseController {
-  static async getCourses(req, res) {
-    const students = await CourseModel.getCourses();
+  constructor({ courseModel }) {
+    this.courseModel = courseModel;
+  }
+  
+  getCourses = async (req, res) => {
+    const students = await this.courseModel.getCourses();
   
     res.status(200).json(students);
   }
 
-  static async getCourse(req, res) {
+  getCourse = async (req, res) => {
     const { id } = req.params;
-    const student = await CourseModel.getCourse({ id });
+    const student = await this.courseModel.getCourse({ id });
   
     res.status(200).json(student);
   }
 
-  static async createCourse(req, res) {
+  createCourse = async (req, res) => {
     const { name } = req.body;
   
     const result = validateCourse({ name });
@@ -23,12 +35,12 @@ export class CourseController {
       return res.status(400).json(result.error);
     }
   
-    const student = await CourseModel.createCourse({ name });
+    const student = await this.courseModel.createCourse({ name });
   
     res.status(201).json(student);
   }
 
-  static async updateCourse(req, res) {
+  updateCourse = async (req, res) => {
     const { id } = req.params;
     const { name } = req.body;
   
@@ -38,14 +50,14 @@ export class CourseController {
       return res.status(400).json(result.error);
     }
   
-    const student = await CourseModel.updateCourse({ id, name });
+    const student = await this.courseModel.updateCourse({ id, name });
   
     res.status(200).json(student);
   }
 
-  static async deleteCourse(req, res) {
+  deleteCourse = async (req, res) => {
     const { id } = req.params;
-    const student = await CourseModel.deleteCourse({ id });
+    const student = await this.courseModel.deleteCourse({ id });
   
     res.status(200).json(student);
   }

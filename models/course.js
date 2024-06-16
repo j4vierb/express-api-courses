@@ -8,11 +8,11 @@ import { CourseService } from "../services/course.js";
  * and data integrity of the data should to be here.
  */
 export class CourseModel {
-  // Dependency injection
+  // "Dependency injection"
   static courseService = CourseService;
 
   static async getCourses() {
-    return this.courseService.getCourses();
+    return await this.courseService.getCourses();
   }
 
   static async getCourse({ id }) {

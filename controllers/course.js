@@ -1,3 +1,5 @@
+import validate from '../schemas/course.js';
+
 /**
  * Class representing a course controller. Uses the
  * design pattern dependency injection to inject the
@@ -29,7 +31,7 @@ export class CourseController {
   createCourse = async (req, res) => {
     const { name } = req.body;
   
-    const result = validateCourse({ name });
+    const result = validate.validateCourse({ name });
   
     if(!result.success) {
       return res.status(400).json(result.error);
@@ -44,7 +46,7 @@ export class CourseController {
     const { id } = req.params;
     const { name } = req.body;
   
-    const result = validatePartialCourse({ name });
+    const result = validate.validatePartialCourse({ name });
   
     if(!result.success) {
       return res.status(400).json(result.error);

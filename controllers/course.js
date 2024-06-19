@@ -8,6 +8,9 @@ import validate from '../schemas/course.js';
  * **note:** The "methods" of this class are really
  * properties with functions assigned to them.
  * 
+ * **note 2:** The controller should to verify the 
+ * parameters passed throw the request.body.
+ * 
  * @author j4vierb
  */
 export class CourseController {

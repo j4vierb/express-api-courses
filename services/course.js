@@ -1,7 +1,9 @@
 import db from './db.js';
 
 /**
- * Class representing a course service.
+ * Class representing a course service. This class should
+ * to provide methods to the Model to validate the business
+ * rules.
  * 
  * @author j4vierb
  */

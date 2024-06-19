@@ -17,7 +17,7 @@ export class CourseModel {
   /**
    * Method to use the CourseService method to get all the courses.
    * 
-   * @returns A promise with the courses if they exists, an empty array otherwise.
+   * @returns Returns an object in json format with the courses.
    */
   static async getCourses() {
     return await this.courseService.getCourses();
@@ -26,8 +26,9 @@ export class CourseModel {
   /**
    * Method to get a course from the database.
    * 
-   * @param {*} param0 
-   * @returns A promise with the course if it exists, an empty array otherwise.
+   * @param {*} object Object with the id to search in the database.
+   * @returns Returns an object with the response from the service in
+   *          json fromat.
    */
   static async getCourse({ id }) {
     return await this.courseService.getCourse({ id });
@@ -36,32 +37,37 @@ export class CourseModel {
   /**
    * Method to create a course in the database.
    * 
-   * @param {*} param0 
-   * @returns Returns an object with the property created,
-   *          it is true if the course was created, false otherwise.
+   * @param {*} object Object with the name to create the course. 
+   * @returns Returns an object with the error property if something
+   *          went wrong and the course if everything is ok.
    */
   static async createCourse({ name }) {
     const response = await this.courseService.createCourse({ name });
-    if(response.error)
-      return response;
 
     return response;
   }
 
+  /**
+   * Method to update a course in the database.
+   * 
+   * @param {*} object Object withe the id and name to update the course. 
+   * @returns Returns the repsonse in json format from the service.
+   */
   static async updateCourse({ id, name }) {
     const response = await this.courseService.updateCourse({ id, name });
-    if(!response)
-      return { error: 'Course not updated' };
 
-    return { id, name };
+    return response;
   }
 
+  /**
+   * Method to delete a course in the database.
+   * 
+   * @param {*} object Object with the id to delete the course.
+   * @returns Returns the response in json format from the service.
+   */
   static async deleteCourse({ id }) {
     const response = await this.courseService.deleteCourse({ id });
 
-    if(!response)
-      return { error: 'Course not deleted' };
-
-    return { message: 'Course deleted' };
+    return response;
   }
 }

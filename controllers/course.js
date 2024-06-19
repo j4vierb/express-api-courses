@@ -14,20 +14,39 @@ import validate from '../schemas/course.js';
  * @author j4vierb
  */
 export class CourseController {
+  /**
+   * Constructor to inject the model throw dependency
+   * injection design pattern.
+   * 
+   * @param {*} object Object that includes the courseModel 
+   */
   constructor({ courseModel }) {
     this.courseModel = courseModel;
   }
   
+  /**
+   * Property that is a function that retrieve the courses if there
+   * exists or an object with the error property
+   */
   getCourses = async (req, res) => {
     const students = await this.courseModel.getCourses();
-  
+
     res.status(200).json(students);
   }
 
+  /**
+   * Property that is a function that retrieve a course if there
+   * exists or an object with the error property.
+   */
   getCourse = async (req, res) => {
     const { id } = req.params;
     const student = await this.courseModel.getCourse({ id });
   
+    if(student.error) {
+      res.status(404).json(student);
+      return;
+    }
+
     res.status(200).json(student);
   }
 
@@ -35,12 +54,16 @@ export class CourseController {
     const { name } = req.body;
   
     const result = validate.validateCourse({ name });
-  
     if(!result.success) {
-      return res.status(400).json(result.error);
+      res.status(400).json(result.error);
+      return;
     }
   
     const student = await this.courseModel.createCourse({ name });
+    if(student.error) {
+      res.status(400).json(student);
+      return;
+    }
   
     res.status(201).json(student);
   }
@@ -50,20 +73,29 @@ export class CourseController {
     const { name } = req.body;
   
     const result = validate.validatePartialCourse({ name });
-  
     if(!result.success) {
-      return res.status(400).json(result.error);
+      res.status(400).json(result.error);
+      return;
     }
   
     const student = await this.courseModel.updateCourse({ id, name });
-  
+    if(student.error) {
+      res.status(400).json(student);
+      return;
+    }
+
     res.status(200).json(student);
   }
 
   deleteCourse = async (req, res) => {
     const { id } = req.params;
+
     const student = await this.courseModel.deleteCourse({ id });
-  
+    if(student.error) {
+      res.status(400).json(student);
+      return;
+    }
+
     res.status(200).json(student);
   }
 }

@@ -28,3 +28,13 @@ export default config;
 |   Model    | <- D. Injection - |  Services  |
 | ---------- |                   | ---------- |
 ```
+
+## Features
+
+- [x] Hacer validaciones parciales en el controlador utilizando `Schema.partial().safeParse();`.
+- [x] Instalar una libreria para solucionar el problema de CORS.
+- [x] Terminar implementación del endpoint del recurso `courses`.
+- [ ] Definir las reglas de negocio para courses. Refactorizar el recurso de students. 
+- [ ] Agregar las validaciones de las reglas de negocio.
+- [ ] Agregar seguridad y autenticación.
+- [ ] Agregar pruebas unitarias.

@@ -34,7 +34,9 @@ export default config;
 - [x] Hacer validaciones parciales en el controlador utilizando `Schema.partial().safeParse();`.
 - [x] Instalar una libreria para solucionar el problema de CORS.
 - [x] Terminar implementación del endpoint del recurso `courses`.
-- [ ] Definir las reglas de negocio para courses. Refactorizar el recurso de students. 
+- [x] Definir las reglas de negocio para courses. Refactorizar el recurso de students.
+- [ ] Añadir las pruebas de postman en collections.
 - [ ] Agregar las validaciones de las reglas de negocio.
 - [ ] Agregar seguridad y autenticación.
 - [ ] Agregar pruebas unitarias.
+- [ ] Refactorizar la validación de las reglas de negocio en el servicio.

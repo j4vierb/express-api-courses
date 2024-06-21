@@ -29,9 +29,9 @@ export class CourseController {
    * exists or an object with the error property
    */
   getCourses = async (req, res) => {
-    const students = await this.courseModel.getCourses();
+    const courses = await this.courseModel.getCourses();
 
-    res.status(200).json(students);
+    res.status(200).json(courses);
   }
 
   /**
@@ -40,14 +40,14 @@ export class CourseController {
    */
   getCourse = async (req, res) => {
     const { id } = req.params;
-    const student = await this.courseModel.getCourse({ id });
+    const course = await this.courseModel.getCourse({ id });
   
-    if(student.error) {
-      res.status(404).json(student);
+    if(course.error) {
+      res.status(404).json(course);
       return;
     }
 
-    res.status(200).json(student);
+    res.status(200).json(course);
   }
 
   createCourse = async (req, res) => {
@@ -59,13 +59,13 @@ export class CourseController {
       return;
     }
   
-    const student = await this.courseModel.createCourse({ name });
-    if(student.error) {
-      res.status(400).json(student);
+    const course = await this.courseModel.createCourse({ name });
+    if(course.error) {
+      res.status(400).json(course);
       return;
     }
   
-    res.status(201).json(student);
+    res.status(201).json(course);
   }
 
   updateCourse = async (req, res) => {
@@ -78,24 +78,24 @@ export class CourseController {
       return;
     }
   
-    const student = await this.courseModel.updateCourse({ id, name });
-    if(student.error) {
-      res.status(400).json(student);
+    const course = await this.courseModel.updateCourse({ id, name });
+    if(course.error) {
+      res.status(400).json(course);
       return;
     }
 
-    res.status(200).json(student);
+    res.status(200).json(course);
   }
 
   deleteCourse = async (req, res) => {
     const { id } = req.params;
 
-    const student = await this.courseModel.deleteCourse({ id });
-    if(student.error) {
-      res.status(400).json(student);
+    const course = await this.courseModel.deleteCourse({ id });
+    if(course.error) {
+      res.status(400).json(course);
       return;
     }
 
-    res.status(200).json(student);
+    res.status(200).json(course);
   }
 }

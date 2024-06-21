@@ -74,7 +74,7 @@ export class CourseService {
   static async updateCourse({ id, name }) {
     const existsOtherCourse = await this.existsOtherCourse({ name });
     if(existsOtherCourse)
-      return { error: 'There exists another course' }
+      return { error: 'There exists another course with the same name' }
 
     const uniqueId = await this.getCourse({ id });
     if(uniqueId.error)

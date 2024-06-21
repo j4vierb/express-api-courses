@@ -7,6 +7,8 @@ import { CourseService } from "../services/course.js";
  * **Note:** The validations of the consistance
  * and data integrity of the data should to be here. Also,
  * the validations of the negociation rules.
+ * 
+ * @author j4vierb
  */
 export class CourseModel {
   // Provides access to CourseService methods in the model

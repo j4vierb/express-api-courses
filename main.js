@@ -1,10 +1,13 @@
 import express from 'express';
-import studentRoutes from './routes/student.js';
+
+import getCorsOptions from './middlewares/cors.js';
+import createLoggingMiddleware from './middlewares/logging.js';
+
+import { createStudentRouter } from './routes/student.js';
 import { createCourseRouter } from './routes/course.js';
-import getCorsOptions from './middleware/cors.js';
-import createLoggingMiddleware from './middleware/logging.js';
 
 import { CourseModel } from './models/course.js';
+import { StudentModel } from './models/student.js';
 
 const app = express();
 const PORT = process.env.PORT || 3003;
@@ -23,7 +26,7 @@ app.get('/', (req, res) => {
   res.json({message: 'ok'});
 });
 
-app.use('/students', studentRoutes);
+app.use('/students', createStudentRouter({ studentModel: StudentModel }));
 app.use('/courses', createCourseRouter({ courseModel: CourseModel }));
 
 app.use((req, res) => {

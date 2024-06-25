@@ -52,8 +52,8 @@ export class StudentService {
     return { id: insertId, name, surname, unique_code };
   }
 
-  static async updateStudent({ name, surname, unique_code }, id) {
-    const studentCodeIsUnique = await this.existsOtherStudentWithUniqueCode({ id });
+  static async updateStudent({ id, name, surname, unique_code }) {
+    const studentCodeIsUnique = await this.existsOtherStudentWithUniqueCode({ unique_code });
     if(!studentCodeIsUnique)
       return { error: 'There exists another student with the same unique code' }
     

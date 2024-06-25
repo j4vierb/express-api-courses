@@ -21,8 +21,8 @@ export class StudentModel {
     return await this.studentService.createStudent({ name, surname, unique_code });
   }
 
-  static async updateStudent({ name, surname, unique_code }, id) {
-    return await this.studentService.updateStudent({ name, surname, unique_code }, id);
+  static async updateStudent({ id, name, surname, unique_code }) {
+    return await this.studentService.updateStudent({id, name, surname, unique_code });
   }
 
   static async deleteStudent({ id }) {

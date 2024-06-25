@@ -50,8 +50,8 @@ export class StudentController {
       res.status(400).json(result.error);
       return;
     }
-  
-    const student = await this.studentModel.updateStudent({ name, surname, unique_code }, id);
+
+    const student = await this.studentModel.updateStudent({ id, name, surname, unique_code });
     if(student.error) {
       res.status(400).json(student);
       return;

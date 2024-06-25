@@ -414,7 +414,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": {{course_id}},\r\n    \"name\": \"Biologia molecular\"\r\n}",
+					"raw": "{\r\n    \"id\": {{course_id}},\r\n    \"name\": \"Análisis I\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -1,0 +1,655 @@
+{
+	"info": {
+		"_postman_id": "4c82a983-bed7-4775-81c3-4e06f042d8eb",
+		"name": "Student",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32617270"
+	},
+	"item": [
+		{
+			"name": "Create a student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let student_response = pm.response.json();\r",
+							"console.log(student_response)\r",
+							"pm.globals.set(`student_id`, student_response.id);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Juan\",\r\n    \"surname\": \"Camilo\",\r\n    \"unique_code\": \"202240321\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/students",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add a new student",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 19,\r\n    \"name\": \"Juan\",\r\n    \"surname\": \"Camilo\",\r\n    \"unique_code\": \"202240321\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/students",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"students"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Create a student with invalid unique_code",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let student = pm.response.json();\r",
+							"pm.globals.set('student_id', student.id);\r",
+							"\r",
+							"pm.test(\"Status ok\", () => {\r",
+							"    pm.response.to.be.ok;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Jaime\",\r\n    \"surname\": \"Escalante\",\r\n    \"unique_code\": \"202240321\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/students",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add a new student",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"error\": \"There exists another student with the same unique code\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/students",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"students"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Get all students",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Should to return almost 1 record\", function() {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.length.greaterThan(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The data is consistent\", function() {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson[0].name).to.be.a('string');\r",
+							"    pm.expect(responseJson[0].surname).to.be.a('string');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/students",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all students",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\": 1,\r\n        \"name\": \"Pepito\",\r\n        \"surname\": \"Perez\",\r\n        \"unique_code\": \"202214779\"\r\n    },\r\n    {\r\n        \"id\": 2,\r\n        \"name\": \"Anita\",\r\n        \"surname\": \"Florez\",\r\n        \"unique_code\": \"202214778\"\r\n    },\r\n    {\r\n        \"id\": 3,\r\n        \"name\": \"Kah\",\r\n        \"surname\": \"Ala\",\r\n        \"unique_code\": \"202215959\"\r\n    },\r\n    {\r\n        \"id\": 4,\r\n        \"name\": \"Camilo\",\r\n        \"surname\": \"Aldana\",\r\n        \"unique_code\": \"202426793\"\r\n    },\r\n    {\r\n        \"id\": 5,\r\n        \"name\": \"Camilo\",\r\n        \"surname\": \"Alpina\",\r\n        \"unique_code\": \"202426793\"\r\n    },\r\n    {\r\n        \"id\": 6,\r\n        \"name\": \"Aldana\",\r\n        \"surname\": \"Diego\",\r\n        \"unique_code\": \"202426793\"\r\n    },\r\n    {\r\n        \"id\": 19,\r\n        \"name\": \"Juan\",\r\n        \"surname\": \"Camilo\",\r\n        \"unique_code\": \"202240321\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Get one student",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/students/{{student_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"students",
+						"{{student_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get one student",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 20,\r\n    \"name\": \"Juan\",\r\n    \"surname\": \"Camilo\",\r\n    \"unique_code\": \"202240321\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/students/{{student_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"students",
+								"{{student_id}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Get student that doens't exists",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/students/0",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"students",
+						"0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get student that doens't exists",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"error\": \"Student with the ID provided not found!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/students/{{student_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"students",
+								"{{student_id}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Update student",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": {{student_id}},\r\n    \"name\": \"Dilan\",\r\n    \"surname\": \"Aldana\",\r\n    \"unique_code\": \"202414879\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/students/{{student_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"students",
+						"{{student_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update student",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"21\",\r\n    \"name\": \"Dilan\",\r\n    \"surname\": \"Aldana\",\r\n    \"unique_code\": \"202414879\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/students/{{student_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"students",
+								"{{student_id}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Update student with invalid unique_code",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": {{student_id}},\r\n    \"name\": \"Dilan\",\r\n    \"surname\": \"Aldana\",\r\n    \"unique_code\": \"202414879\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/students/{{student_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"students",
+						"{{student_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update student with invalid unique_code",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"error\": \"There exists another student with the same unique code\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/students/{{student_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"students",
+								"{{student_id}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Update student with invalid id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"name\": \"Dilan\",\r\n    \"surname\": \"Aldana\",\r\n    \"unique_code\": \"202414809\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/students/0",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"students",
+						"0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update student with invalid id",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"error\": \"There isn't some student with the ID provided!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/students/0",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"students",
+								"0"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete student",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/students/{{student_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"students",
+						"{{student_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete student",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"message\": \"The student was deleted!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/students/{{student_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"students",
+								"{{student_id}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete student that doens't exists",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/students/0",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"students",
+						"0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete student that doens't exists",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"error\": \"There isn't some student with the ID provided!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/students/0",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"students",
+								"0"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}

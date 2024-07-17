@@ -72,7 +72,7 @@ export class CourseService {
    * @returns Returns true if the course was updated, false otherwise.
    */
   static async updateCourse({ id, name }) {
-    const existsOtherCourse = await this.existsOtherCourse({ name });
+    const existsOtherCourse = await this.existsOtherCourse({ name }); // estas validaciones deberian estar en el modelo :p
     if(existsOtherCourse)
       return { error: 'There exists another course with the same name' }
 

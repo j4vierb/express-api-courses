@@ -39,4 +39,4 @@ export default config;
 - [ ] Agregar las validaciones de las reglas de negocio.
 - [ ] Agregar seguridad y autenticación.
 - [ ] Agregar pruebas unitarias.
-- [ ] Refactorizar la validación de las reglas de negocio en el servicio.
+- [ ] Refactorizar la validación de las reglas de negocio del servicio al modelo.

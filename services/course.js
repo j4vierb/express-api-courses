@@ -17,9 +17,6 @@ export class CourseService {
     const result = await db.query(
       `SELECT * FROM course;`
     );
-
-    if(!result)
-      return [];
   
     return result;
   }
@@ -36,10 +33,7 @@ export class CourseService {
       [id]
     );
 
-    if(result.length === 0)
-      return { error: 'Course with the ID provided not found!' };
-
-    return result[0];
+    return result;
   }
 
   /**
@@ -49,10 +43,6 @@ export class CourseService {
    * @returns Returns the course if the course was created, an empty object otherwise.
    */
   static async createCourse({ name }) {
-    const existsOtherCourse = await this.existsOtherCourse({ name });
-    if(existsOtherCourse)
-      return { error: 'There exists another course with the same name' }
-
     const { affectedRows, insertId } = await db.query(
       `INSERT INTO course (name) VALUES (?);`,
       [name]
@@ -72,14 +62,6 @@ export class CourseService {
    * @returns Returns true if the course was updated, false otherwise.
    */
   static async updateCourse({ id, name }) {
-    const existsOtherCourse = await this.existsOtherCourse({ name }); // estas validaciones deberian estar en el modelo :p
-    if(existsOtherCourse)
-      return { error: 'There exists another course with the same name' }
-
-    const uniqueId = await this.getCourse({ id });
-    if(uniqueId.error)
-      return { error: 'The course id doesn\'t exists!'}
-
     const result = await db.query(
       `UPDATE course SET name = ? WHERE course_id = ?;`,
       [name, id]
@@ -98,10 +80,6 @@ export class CourseService {
    * @returns True if the course was deleted, false otherwise.
    */
   static async deleteCourse({ id }) {
-    const uniqueId = await this.getCourse({ id });
-    if(uniqueId.error)
-      return { error: 'The course id doesn\'t exists!'}
-
     const result = await db.query(
       'DELETE FROM course WHERE course_id = ?;',
       [id]

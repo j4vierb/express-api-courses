@@ -10,6 +10,8 @@ import { CourseModel } from './models/course.js';
 import { StudentModel } from './models/student.js';
 import { createStudentCourseRouter } from './routes/studentCourse.js';
 import { StudentCourseModel } from './models/studentCourse.js';
+import { createCourseStudentRouter } from './routes/courseStudent.js';
+import { CourseStudentModel } from './models/courseStudent.js';
 
 const app = express();
 const PORT = process.env.PORT || 3003;
@@ -32,6 +34,7 @@ app.use('/students', createStudentRouter({ studentModel: StudentModel }));
 app.use('/courses', createCourseRouter({ courseModel: CourseModel }));
 
 app.use('/students', createStudentCourseRouter({ studentCourseModel: StudentCourseModel }))
+app.use('/courses', createCourseStudentRouter({ courseStudentModel: CourseStudentModel }))
 
 app.use((req, res) => {
   res.status(404).send('<h1>404 Not Found</h1>');

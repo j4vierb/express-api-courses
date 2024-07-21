@@ -17,9 +17,6 @@ export class StudentService {
       `SELECT * FROM student;`
     );
 
-    if(!result)
-      return [];
-
     return result;
   }
 
@@ -29,17 +26,10 @@ export class StudentService {
       [id]
     );
     
-    if(result.length === 0)
-      return { error: 'Student with the ID provided not found!' };
-    
-    return result[0];
+    return result;
   }
 
   static async createStudent({ name, surname, unique_code }) {
-    const studentCodeIsUnique = await this.existsOtherStudentWithUniqueCode({ unique_code });
-    if(!studentCodeIsUnique)
-      return { error: 'There exists another student with the same unique code' };
-
     const { insertId, affectedRows } = await db.query(
       `INSERT INTO student (name, surname, unique_code) VALUES (?, ?, ?);`,
       [name, surname, unique_code]
@@ -52,15 +42,7 @@ export class StudentService {
     return { id: insertId, name, surname, unique_code };
   }
 
-  static async updateStudent({ id, name, surname, unique_code }) {
-    const studentCodeIsUnique = await this.existsOtherStudentWithUniqueCode({ unique_code });
-    if(!studentCodeIsUnique)
-      return { error: 'There exists another student with the same unique code' }
-    
-    const studentExists = await this.getStudent({ id });
-    if(studentExists.error)
-      return { error: 'There isn\'t some student with the ID provided!' };
-
+  static async updateStudent({ id, name, surname, unique_code }) {  
     const result = await db.query(
       `UPDATE student SET name = ?, surname = ?, unique_code = ? WHERE id = ?;`,
       [name, surname, unique_code, id]
@@ -73,10 +55,6 @@ export class StudentService {
   };
 
   static async deleteStudent({ id }) {
-    const studentExists = await this.getStudent({ id });
-    if(studentExists.error)
-      return { error: 'There isn\'t some student with the ID provided!' };
-
     const result = await db.query(
       `DELETE FROM student WHERE id = ?;`,
       [id]

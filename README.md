@@ -35,8 +35,8 @@ export default config;
 - [x] Instalar una libreria para solucionar el problema de CORS.
 - [x] Terminar implementación del endpoint del recurso `courses`.
 - [x] Definir las reglas de negocio para courses. Refactorizar el recurso de students.
-- [ ] Añadir las pruebas de postman en collections.
-- [ ] Agregar las validaciones de las reglas de negocio.
-- [ ] Agregar seguridad y autenticación.
-- [ ] Agregar pruebas unitarias.
-- [ ] Refactorizar la validación de las reglas de negocio del servicio al modelo.
+- [x] Refactorizar la validación de las reglas de negocio del servicio al modelo.
+- [/] Añadir las pruebas de postman en collections.
+- [/] Agregar las validaciones de las reglas de negocio.
+- [/] Agregar seguridad y autenticación.
+- [/] Agregar pruebas unitarias.

@@ -7,18 +7,47 @@ export class CourseStudentController {
     const { course_id } = req.params;
     const students = await this.courseStudentModel.getCourseStudents({ course_id });
 
-    res.status(200).json(students);
-  }
-
-  getStudentCourse = async (req, res) => {
-    const { student_id, course_id } = req.params;
-    const course = await this.studentCourseModel.getStudentCourse({ student_id, course_id });
-
-    if (course.error) {
-      res.status(404).json(course);
+    if (students.error) {
+      res.status(404).json(students);
       return;
     }
 
-    res.status(200).json(course);
+    res.status(200).json(students);
+  }
+
+  getCourseStudent = async (req, res) => {
+    const { student_id, course_id } = req.params;
+    const student = await this.courseStudentModel.getCourseStudent({ student_id, course_id });
+
+    if (student.error) {
+      res.status(404).json(student);
+      return;
+    }
+
+    res.status(200).json(student);
+  }
+
+  addCourseStudent = async (req, res) => {
+    const { student_id, course_id } = req.params;
+    const response = await this.courseStudentModel.addCourseStudent({ student_id, course_id });
+
+    if (response.error) {
+      res.status(400).json(response);
+      return;
+    }
+
+    res.status(201).json(response);
+  }
+
+  deleteCourseStudent = async (req, res) => {
+    const { student_id, course_id } = req.params;
+    const response = await this.courseStudentModel.deleteCourseStudent({ student_id, course_id });
+
+    if (response.error) {
+      res.status(404).json(response);
+      return;
+    }
+
+    res.status(200).json(response);
   }
 }

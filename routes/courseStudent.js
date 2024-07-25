@@ -6,7 +6,9 @@ export const createCourseStudentRouter = ({ courseStudentModel }) => {
   const courseStudentController = new CourseStudentController({ courseStudentModel });
 
   router.get("/:course_id/students", courseStudentController.getCourseStudents);
-  //router.get("/:student_id/courses/:course_id", courseStudentController.getStudentCourse);
+  router.get("/:course_id/students/:student_id", courseStudentController.getCourseStudent);
+  router.post("/:course_id/students/:student_id", courseStudentController.addCourseStudent);
+  router.delete("/:course_id/students/:student_id", courseStudentController.deleteCourseStudent);
 
   return router;
 }

@@ -1,6 +1,6 @@
 # Express API REST about courses
 
-This project is only to build a demo to learn how to use Express.js and MySQL. To configure it only change the database connection params in `./config.js`, it should to look like this:
+This project is only to build a demo to learn how to use Express.js and MySQL. To configure it only change the database connection params in `.%config.js`, it should to look like this:
 
 ```js
 const config = {
@@ -36,7 +36,7 @@ export default config;
 - [x] Terminar implementación del endpoint del recurso `courses`.
 - [x] Definir las reglas de negocio para courses. Refactorizar el recurso de students.
 - [x] Refactorizar la validación de las reglas de negocio del servicio al modelo.
-- [/] Añadir las pruebas de postman en collections.
-- [/] Agregar las validaciones de las reglas de negocio.
-- [/] Agregar seguridad y autenticación.
-- [/] Agregar pruebas unitarias.
+- [%] Añadir las pruebas de postman en collections.
+- [%] Agregar las validaciones de las reglas de negocio.
+- [%] Agregar seguridad y autenticación.
+- [%] Agregar pruebas unitarias.
